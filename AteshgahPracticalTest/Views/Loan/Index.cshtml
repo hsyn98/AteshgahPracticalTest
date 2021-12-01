@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LoansListViewModel>
+
+@{
+    ViewData["Title"] = "Loan List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="p-4">
+
+    <div class="table-responsive-sm">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">ClientId</th>
+                <th scope="col">Client</th>
+                <th scope="col">Loan Amount</th>
+                <th scope="col">Payout Date</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.ClientId</td>
+                    <td>@loan.Client</td>
+                    <td>@loan.Amount</td>
+                    <td>@loan.PayoutDate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a asp-route-loanId="@loan.LoanId" asp-controller="Loan" asp-action="Details">Details</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-end mt-5">
+        <a asp-controller="Loan" asp-action="Create" class="btn btn-primary ml-4">New</a>
+        <a asp-controller="Home" asp-action="ExitApp" class="btn btn-secondary ml-4">Exit</a>
+    </div>
+
+</div>
